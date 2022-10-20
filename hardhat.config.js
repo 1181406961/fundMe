@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
 require("solidity-coverage");
 require("hardhat-gas-reporter");
@@ -23,7 +24,8 @@ module.exports = {
             url: GOERLI_RPC_URL,
             accounts: [PRIVATE_KEY],
             chainId: 5,
-
+            blockConfirmations: 6,
+            timeout: 3000000
         }
     },
     solidity: {
@@ -37,7 +39,9 @@ module.exports = {
         ]
     },
     etherscan: {
-        apikey: ETHERSCAN_API_KEY,
+        apiKey: {
+            goerli: ETHERSCAN_API_KEY,
+        },
     },
     gasReporter: {
         enable: true,
